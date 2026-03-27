@@ -1,0 +1,499 @@
+/* ── MODAL ── */
+    .mbg { position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.82); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; }
+    .mbg.show { display: flex; }
+    .mbox {
+      background: var(--bg-card); border: 1px solid rgba(0,229,255,0.15);
+      border-radius: var(--radius); width: min(480px,92vw); padding: 1.8rem;
+      position: relative; box-shadow: 0 0 60px rgba(0,229,255,0.07);
+      animation: popIn 0.28s ease;
+    }
+    .mbox::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; border-radius: var(--radius) var(--radius) 0 0; background: linear-gradient(90deg, var(--cyan), #0044ff, var(--cyan)); }
+    @keyframes popIn { from{transform:scale(0.92);opacity:0} to{transform:scale(1);opacity:1} }
+    .mcx { position: absolute; top: 13px; right: 13px; background: var(--bg-card2); border: 1px solid rgba(255,255,255,0.07); color: var(--text-mid); width: 27px; height: 27px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.68rem; transition: all 0.2s; }
+    .mcx:hover { border-color: var(--red); color: var(--red); }
+    .msys { font-family: var(--mono); font-size: 0.56rem; color: var(--text-dim); text-align: right; margin-bottom: 1.1rem; letter-spacing: 1px; }
+    .msys .on { color: var(--green); }
+    .mtabs { display: flex; background: var(--bg-card2); border-radius: var(--rsm); padding: 3px; margin-bottom: 1.4rem; gap: 0; }
+    .mtab { flex: 1; padding: 8px; font-family: var(--head); font-size: 0.6rem; font-weight: 700; letter-spacing: 1.5px; text-align: center; cursor: pointer; border-radius: 6px; transition: all 0.2s; color: var(--text-mid); text-transform: uppercase; border: none; background: transparent; }
+    .mtab.active { background: var(--cyan); color: #070b14; box-shadow: 0 0 12px rgba(0,229,255,0.3); }
+    .flbl { font-family: var(--mono); font-size: 0.58rem; color: var(--text-mid); letter-spacing: 1.5px; text-transform: uppercase; display: block; margin-bottom: 5px; }
+    .fin { width: 100%; background: var(--bg-card2); border: 1px solid var(--text-dim); border-radius: var(--rsm); padding: 9px 13px; font-family: var(--mono); font-size: 0.75rem; color: var(--text); outline: none; transition: border 0.2s; margin-bottom: 13px; letter-spacing: 0.5px; }
+    .fin:focus { border-color: var(--cyan); box-shadow: 0 0 9px rgba(0,229,255,0.13); }
+    .fin::placeholder { color: var(--text-dim); }
+    .crow { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .clbl { font-family: var(--mono); font-size: 0.6rem; color: var(--text-mid); display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .fgt { font-family: var(--mono); font-size: 0.6rem; color: var(--cyan); cursor: pointer; text-decoration: none; }
+    .fgt:hover { text-decoration: underline; }
+    .ctabtn { width: 100%; padding: 11px; background: linear-gradient(135deg, var(--orange), var(--orange2)); border: none; border-radius: var(--rsm); font-family: var(--head); font-size: 0.68rem; font-weight: 700; letter-spacing: 2px; color: #fff; cursor: pointer; transition: all 0.2s; text-transform: uppercase; box-shadow: var(--glow-o); display: flex; align-items: center; justify-content: center; gap: 7px; }
+    .ctabtn:hover { opacity: 0.86; transform: translateY(-1px); }
+    .odiv { text-align: center; font-family: var(--mono); font-size: 0.56rem; color: var(--text-dim); letter-spacing: 2px; margin: 13px 0; position: relative; }
+    .odiv::before, .odiv::after { content: ''; position: absolute; top: 50%; width: 38%; height: 1px; background: rgba(0,229,255,0.08); }
+    .odiv::before { left: 0; } .odiv::after { right: 0; }
+    .socr { display: flex; gap: 9px; margin-bottom: 13px; }
+    .socbtn { flex: 1; padding: 8px; background: var(--bg-card2); border: 1px solid var(--text-dim); border-radius: var(--rsm); font-family: var(--head); font-size: 0.58rem; font-weight: 600; letter-spacing: 1px; color: var(--text-mid); cursor: pointer; transition: all 0.2s; text-transform: uppercase; }
+    .socbtn:hover { border-color: var(--cyan); color: var(--cyan); }
+    .malt { font-family: var(--mono); font-size: 0.6rem; color: var(--text-dim); text-align: center; }
+    .malt a { color: var(--cyan); cursor: pointer; text-decoration: none; }
+    .malt a:hover { text-decoration: underline; }
+
+    /* ── HELP ── */
+    .hov { position: fixed; inset: 0; z-index: 299; background: rgba(0,0,0,0.5); display: none; }
+    .hov.show { display: block; }
+    .hpan {
+      position: fixed; top: 0; right: -360px; bottom: 0; width: 340px; z-index: 300;
+      background: var(--bg-card); border-left: 1px solid var(--border);
+      transition: right 0.33s cubic-bezier(.4,0,.2,1); overflow-y: auto; padding: 1.6rem;
+    }
+    .hpan::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, var(--cyan), #0044ff); }
+    .hpan.open { right: 0; }
+    .htitle { font-family: var(--head); font-size: 0.82rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); margin-bottom: 2px; }
+    .hsub { font-family: var(--mono); font-size: 0.58rem; color: var(--text-dim); letter-spacing: 1px; margin-bottom: 1.3rem; }
+    .hstitle { font-family: var(--mono); font-size: 0.56rem; color: var(--cyan); letter-spacing: 2px; text-transform: uppercase; margin: 1.2rem 0 9px; }
+    .hitem { display: flex; gap: 9px; margin-bottom: 9px; }
+    .hico { width: 28px; height: 28px; border-radius: 6px; background: var(--cyan-dim); border: 1px solid rgba(0,229,255,0.18); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; color: var(--cyan); flex-shrink: 0; }
+    .htxt { font-family: var(--body); font-size: 0.82rem; color: var(--text-mid); line-height: 1.5; }
+    .htxt strong { color: var(--text); }
+
+    /* ── TOAST ── */
+    .tw { position: fixed; bottom: 18px; right: 18px; z-index: 600; display: flex; flex-direction: column; gap: 6px; }
+    .ti { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--rsm); padding: 9px 13px; font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.5px; color: var(--text); display: flex; align-items: center; gap: 7px; animation: slideIn 0.3s ease; min-width: 190px; }
+    .ti.s { border-color: rgba(0,255,153,0.28); } .ti.s i { color: var(--green); }
+    .ti.w { border-color: rgba(255,230,0,0.28); } .ti.w i { color: var(--yellow); }
+    .ti.e { border-color: rgba(255,45,85,0.28); } .ti.e i { color: var(--red); }
+    @keyframes slideIn { from{transform:translateX(110%);opacity:0} to{transform:translateX(0);opacity:1} }
+
+    /* ── FOOTER ── */
+    footer { border-top: 1px solid var(--border); padding: 1.1rem 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; position: relative; z-index: 1; }
+    .fbrand { font-family: var(--head); font-size: 0.95rem; letter-spacing: 3px; }
+    .fbrand .p { color: var(--cyan); } .fbrand .e { color: var(--yellow); }
+    .ftxt { font-family: var(--mono); font-size: 0.54rem; color: var(--text-dim); letter-spacing: 1px; margin-top: 2px; }
+    .flinks { display: flex; gap: 13px; }
+    .flinks a { font-family: var(--mono); font-size: 0.58rem; color: var(--text-dim); text-decoration: none; letter-spacing: 1px; transition: color 0.2s; }
+    .flinks a:hover { color: var(--cyan); }
+
+    /* ── GUEST PROFILE PANEL ── */
+    .pp-guest-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 2rem 1.4rem 1.8rem;
+      border-bottom: 1px solid rgba(0,229,255,0.07);
+      background: linear-gradient(180deg, rgba(0,229,255,0.03) 0%, transparent 100%);
+      flex-shrink: 0;
+    }
+    .pp-guest-icon {
+      width: 72px; height: 72px; border-radius: 50%;
+      background: var(--bg-card2);
+      border: 2px dashed rgba(0,229,255,0.25);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem; color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+    .pp-guest-title { font-family: var(--head); font-size: 0.82rem; font-weight: 700; letter-spacing: 1px; color: var(--text); margin-bottom: 6px; text-align: center; }
+    .pp-guest-sub { font-family: var(--mono); font-size: 0.58rem; color: var(--text-dim); letter-spacing: 0.5px; text-align: center; margin-bottom: 18px; line-height: 1.6; }
+    .pp-guest-btns { display: flex; gap: 9px; width: 100%; }
+    .pp-gbtn {
+      flex: 1; padding: 9px; border-radius: var(--rsm);
+      font-family: var(--head); font-size: 0.58rem; font-weight: 700; letter-spacing: 1.5px;
+      cursor: pointer; transition: all 0.2s; text-transform: uppercase;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .pp-gbtn-login { background: transparent; border: 1px solid rgba(0,229,255,0.4); color: var(--cyan); }
+    .pp-gbtn-login:hover { background: var(--cyan-dim); box-shadow: var(--glow-c); }
+    .pp-gbtn-reg { background: linear-gradient(135deg, var(--orange), var(--orange2)); border: none; color: #fff; box-shadow: var(--glow-o); }
+    .pp-gbtn-reg:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    /* Guest quick-info tiles */
+    .pp-guest-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; padding: 14px 18px; }
+    .pp-tile {
+      background: var(--bg-card2); border: 1px solid rgba(0,229,255,0.07);
+      border-radius: 9px; padding: 12px 10px;
+      display: flex; flex-direction: column; align-items: center; gap: 7px;
+      transition: border-color 0.2s, background 0.2s; cursor: default;
+    }
+    .pp-tile:hover { border-color: rgba(0,229,255,0.2); background: rgba(0,229,255,0.04); }
+    .pp-tile-ico { font-size: 1.1rem; }
+    .pp-tile-lbl { font-family: var(--head); font-size: 0.52rem; font-weight: 700; letter-spacing: 1px; color: var(--text-mid); text-transform: uppercase; text-align: center; line-height: 1.4; }
+
+    /* Notification badge on profile btn */
+    .profile-notif {
+      position: absolute; top: -3px; right: -3px;
+      width: 15px; height: 15px; border-radius: 50%;
+      background: var(--red); border: 1.5px solid var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 0.45rem; color: #fff; font-weight: 700;
+      box-shadow: 0 0 6px rgba(255,45,85,0.5);
+      display: none;
+    }
+
+    @media(max-width:768px){
+      .navbar-pk,.filter-bar,.main,.legend-bar,.loc-bar{padding-left:1rem;padding-right:1rem}
+      .park-grid{grid-template-columns:1fr}
+      .sw{width:100%}
+      .nb span{display:none}
+      .sys-pill{display:none}
+      .loc-value { max-width: 120px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar-pk">
+  <a href="#" class="brand">
+    <div class="brand-hex">P</div>
+    <div class="brand-stack">
+      <div class="brand-name"><span class="p">Park</span><span class="e">Ezy</span></div>
+      <div class="brand-sub">SPEED · PRECISION · PARKING</div>
+    </div>
+  </a>
+  <div class="nav-r">
+    <button class="nb nb-ghost" onclick="openHelp()"><i class="fa-regular fa-circle-question"></i><span>HELP</span></button>
+
+    <!-- Login/Register shown when logged out -->
+    <button class="nb nb-cyan" id="loginBtn" onclick="openModal('login')"><i class="fa-regular fa-user"></i><span>LOGIN</span></button>
+    <button class="nb nb-orange" id="registerBtn" onclick="openModal('register')"><i class="fa-solid fa-user-plus"></i><span>REGISTER</span></button>
+
+    <!-- Profile icon always visible -->
+    <div class="profile-wrap" id="profileWrap">
+      <button class="profile-btn" id="profileBtn" onclick="openProfilePanel()">
+        <i class="fa-solid fa-user" id="profileIcon"></i>
+        <div class="profile-dot" id="profileDot" style="display:none"></div>
+        <div class="profile-notif" id="profileNotif">2</div>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- LEGEND -->
+<div class="legend-bar">
+  <div class="li"><div class="ld g"></div>AVAILABLE</div>
+  <div class="li"><div class="ld a"></div>FILLING UP</div>
+  <div class="li"><div class="ld r"></div>FULL</div>
+  <div class="li"><div class="ld e"></div>EV CHARGER</div>
+  <div class="live-tag"><div class="live-dot"></div>LIVE FEED · 15s REFRESH</div>
+</div>
+
+<!-- LOCATION BAR -->
+<div class="loc-bar" id="locWrap">
+  <div class="loc-bar-inner">
+    <button class="loc-btn" id="locBtn" onclick="toggleLocDropdown()">
+      <i class="fa-solid fa-location-crosshairs loc-icon"></i>
+      <div class="loc-text">
+        <span class="loc-label">SEARCHING NEAR</span>
+        <span class="loc-value" id="locValue">Select your location...</span>
+      </div>
+      <i class="fa-solid fa-chevron-down loc-arrow"></i>
+    </button>
+    <div class="loc-dropdown" id="locDropdown">
+      <div class="loc-dd-header">
+        <div class="loc-dd-title">SET YOUR LOCATION</div>
+        <div class="loc-dd-sub">CHOOSE HOW TO DETECT YOUR AREA</div>
+      </div>
+      <div class="loc-option" id="gpsOption" onclick="useGPS()">
+        <div class="loc-opt-ico gps"><i class="fa-solid fa-crosshairs"></i></div>
+        <div class="loc-opt-body">
+          <div class="loc-opt-title">Use My GPS</div>
+          <div class="loc-opt-desc">Auto-detect via device location</div>
+        </div>
+        <span class="loc-opt-tag">FAST</span>
+      </div>
+      <div class="gps-loading" id="gpsLoading">
+        <div class="gps-spin"></div>
+        <span class="gps-load-txt">ACQUIRING SIGNAL...</span>
+      </div>
+      <div class="loc-option" onclick="toggleManualInput()">
+        <div class="loc-opt-ico manual"><i class="fa-solid fa-keyboard"></i></div>
+        <div class="loc-opt-body">
+          <div class="loc-opt-title">Enter Manually</div>
+          <div class="loc-opt-desc">Type your area or locality</div>
+        </div>
+        <i class="fa-solid fa-chevron-right" style="color:var(--text-dim);font-size:0.6rem;flex-shrink:0" id="manualArrow"></i>
+      </div>
+      <div class="loc-manual-panel" id="manualPanel">
+        <div class="loc-minput-wrap">
+          <input class="loc-minput" id="manualLocInput" type="text" placeholder="e.g. Koramangala, Bangalore" onkeydown="if(event.key==='Enter')setManualLocation()"/>
+          <button class="loc-minput-go" onclick="setManualLocation()"><i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+        <div class="loc-hint">Type area name, street or city</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <div class="fl">
+    <div class="sw">
+      <i class="fa-solid fa-magnifying-glass si-icon"></i>
+      <input class="si" type="text" id="searchInput" placeholder="SEARCH SPOTS..." oninput="handleSearch()"/>
+    </div>
+    <span class="flabel">// FILTER:</span>
+    <div class="chip active" onclick="setFilter(this,'all')"><i class="fa-solid fa-border-all"></i>ALL</div>
+    <div class="chip" onclick="setFilter(this,'available')"><i class="fa-solid fa-circle" style="color:var(--green)"></i>AVAILABLE</div>
+    <div class="chip" onclick="setFilter(this,'covered')"><i class="fa-solid fa-warehouse"></i>COVERED</div>
+    <div class="chip" onclick="setFilter(this,'open')"><i class="fa-solid fa-sun"></i>OPEN AIR</div>
+    <div class="chip" onclick="setFilter(this,'24h')"><i class="fa-solid fa-clock"></i>24H</div>
+    <div class="chip" onclick="setFilter(this,'disabled')"><i class="fa-solid fa-wheelchair"></i>ACCESS</div>
+  </div>
+  <div class="ev-wrap" id="evToggle" onclick="toggleEV()">
+    <span class="ev-lbl"><i class="fa-solid fa-bolt"></i>EV CHARGING ONLY</span>
+    <div class="tgl"></div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+  <div class="ev-banner" id="evBanner">
+    <span style="font-size:1.1rem">⚡</span>
+    <span>FILTER ACTIVE — Showing <strong>EV CHARGING ENABLED</strong> locations only. All spots below have dedicated chargers.</span>
+  </div>
+  <div class="sec-hdr">
+    <div class="sec-l">
+      <i class="fa-solid fa-location-dot" style="color:var(--cyan);font-size:0.78rem"></i>
+      <span class="sec-title" id="secTitle">NEARBY PARKING</span>
+      <span class="sec-cnt" id="secCnt">12 SPOTS</span>
+    </div>
+    <button class="sort-btn" onclick="cycleSort()">
+      <i class="fa-solid fa-arrow-up-wide-short"></i>
+      <span id="sortLbl">SORT: DISTANCE</span>
+    </button>
+  </div>
+  <div class="park-grid" id="parkGrid"></div>
+</main>
+
+<footer>
+  <div>
+    <div class="fbrand"><span class="p">Park</span><span class="e">Ezy</span></div>
+    <div class="ftxt">© 2025 PARKEZY · SMART PARKING SYSTEM v2.4</div>
+  </div>
+  <div class="flinks">
+    <a href="#">PRIVACY</a><a href="#">TERMS</a><a href="#">CONTACT</a>
+  </div>
+</footer>
+
+<!-- PROFILE SIDE PANEL OVERLAY -->
+<div class="profile-overlay" id="profileOverlay" onclick="closeProfilePanel()"></div>
+
+<!-- PROFILE SIDE PANEL -->
+<div class="profile-panel" id="profilePanel">
+
+  <!-- Top bar -->
+  <div class="pp-head">
+    <div class="pp-toprow">
+      <span class="pp-title" id="ppPanelTitle">MY PROFILE</span>
+      <button class="pp-close" onclick="closeProfilePanel()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+  </div>
+
+  <!-- ── GUEST VIEW (shown when not logged in) ── -->
+  <div id="ppGuestView">
+    <div class="pp-guest-wrap">
+      <div class="pp-guest-icon"><i class="fa-solid fa-user-astronaut"></i></div>
+      <div class="pp-guest-title">Hey, Stranger!</div>
+      <div class="pp-guest-sub">Log in to track your bookings,<br/>save favourite spots & manage your account.</div>
+      <div class="pp-guest-btns">
+        <button class="pp-gbtn pp-gbtn-login" onclick="closeProfilePanel();openModal('login')"><i class="fa-regular fa-user"></i>LOGIN</button>
+        <button class="pp-gbtn pp-gbtn-reg" onclick="closeProfilePanel();openModal('register')"><i class="fa-solid fa-user-plus"></i>REGISTER</button>
+      </div>
+    </div>
+
+    <!-- Feature tiles for guest -->
+    <div style="padding:14px 18px 6px;font-family:var(--mono);font-size:0.5rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;">// WHAT YOU GET</div>
+    <div class="pp-guest-tiles">
+      <div class="pp-tile">
+        <div class="pp-tile-ico">📍</div>
+        <div class="pp-tile-lbl">Save Favourite Spots</div>
+      </div>
+      <div class="pp-tile">
+        <div class="pp-tile-ico">🕐</div>
+        <div class="pp-tile-lbl">Booking History</div>
+      </div>
+      <div class="pp-tile">
+        <div class="pp-tile-ico">⚡</div>
+        <div class="pp-tile-lbl">EV Charger Alerts</div>
+      </div>
+      <div class="pp-tile">
+        <div class="pp-tile-ico">💳</div>
+        <div class="pp-tile-lbl">Wallet & Payments</div>
+      </div>
+    </div>
+
+    <div class="pp-divider" style="margin:8px 0"></div>
+    <div style="padding:10px 18px 4px;font-family:var(--mono);font-size:0.5rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;">// QUICK INFO</div>
+    <button class="pp-item" onclick="closeProfilePanel();openHelp()">
+      <div class="pp-item-ico y"><i class="fa-solid fa-circle-question"></i></div>
+      <div class="pp-item-body">
+        <div class="pp-item-title">Help & FAQ</div>
+        <div class="pp-item-sub">How ParkEzy works</div>
+      </div>
+      <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+    </button>
+    <button class="pp-item" onclick="ppAction('Contact Support')">
+      <div class="pp-item-ico c"><i class="fa-solid fa-headset"></i></div>
+      <div class="pp-item-body">
+        <div class="pp-item-title">Contact Support</div>
+        <div class="pp-item-sub">We're here 24/7</div>
+      </div>
+      <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+    </button>
+  </div>
+
+  <!-- ── LOGGED IN VIEW ── -->
+  <div id="ppLoggedView" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+
+    <!-- Avatar block -->
+    <div class="pp-avatar-wrap">
+      <div class="pp-avatar" id="ppAvatar">
+        <span id="ppInitials">U</span>
+        <div class="pp-avatar-dot"></div>
+      </div>
+      <div class="pp-uname" id="ppName">USERNAME</div>
+      <div class="pp-email" id="ppEmail">user@parkezy.in</div>
+      <div class="pp-badge">⚡ PREMIUM MEMBER</div>
+    </div>
+
+    <!-- Stats row -->
+    <div class="pp-info-grid">
+      <div class="pp-stat">
+        <div class="pp-stat-num" id="ppBookings">12</div>
+        <div class="pp-stat-lbl">BOOKINGS</div>
+      </div>
+      <div class="pp-stat">
+        <div class="pp-stat-num" id="ppSaved">0</div>
+        <div class="pp-stat-lbl">SAVED</div>
+      </div>
+      <div class="pp-stat">
+        <div class="pp-stat-num">4.9★</div>
+        <div class="pp-stat-lbl">RATING</div>
+      </div>
+    </div>
+
+    <!-- Scrollable menu body -->
+    <div class="pp-body">
+
+      <!-- Personal Info -->
+      <div class="pp-section-label">// PERSONAL INFO</div>
+      <button class="pp-item" onclick="ppAction('Edit Profile')">
+        <div class="pp-item-ico c"><i class="fa-solid fa-user-pen"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">Edit Profile</div>
+          <div class="pp-item-sub">Name, phone, email, photo</div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+      <button class="pp-item" onclick="ppAction('Vehicles')">
+        <div class="pp-item-ico c"><i class="fa-solid fa-car"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">My Vehicles</div>
+          <div class="pp-item-sub" id="ppVehicleSub">2 vehicles registered</div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+      <button class="pp-item" onclick="ppAction('Wallet')">
+        <div class="pp-item-ico y"><i class="fa-solid fa-wallet"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">Wallet & Payments</div>
+          <div class="pp-item-sub">Balance: <span style="color:var(--green)">₹240.00</span></div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+
+      <div class="pp-divider"></div>
+
+      <!-- History -->
+      <div class="pp-section-label">// PARKING HISTORY</div>
+      <div class="pp-history-item">
+        <div class="pp-hist-ico"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <div>
+          <div class="pp-hist-name">Nexus Smart Park</div>
+          <div class="pp-hist-meta">Today · 2h 15m · Koramangala</div>
+        </div>
+        <div class="pp-hist-price">₹56</div>
+      </div>
+      <div class="pp-history-item">
+        <div class="pp-hist-ico"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <div>
+          <div class="pp-hist-name">Volt Park Station</div>
+          <div class="pp-hist-meta">Yesterday · 1h 00m · Electronic City</div>
+        </div>
+        <div class="pp-hist-price">₹28</div>
+      </div>
+      <div class="pp-history-item">
+        <div class="pp-hist-ico"><i class="fa-solid fa-clock-rotate-left"></i></div>
+        <div>
+          <div class="pp-hist-name">GreenLot EV Centre</div>
+          <div class="pp-hist-meta">23 Jul · 3h 30m · Whitefield</div>
+        </div>
+        <div class="pp-hist-price">₹105</div>
+      </div>
+      <button class="pp-item" onclick="ppAction('Full History')" style="margin-top:2px">
+        <div class="pp-item-ico p"><i class="fa-solid fa-list"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">View Full History</div>
+          <div class="pp-item-sub">All 12 past bookings</div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+
+      <div class="pp-divider"></div>
+
+      <!-- Saved Spots -->
+      <div class="pp-section-label">// SAVED SPOTS</div>
+      <button class="pp-item" onclick="ppAction('Wishlist')">
+        <div class="pp-item-ico r"><i class="fa-solid fa-heart"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">My Wishlist</div>
+          <div class="pp-item-sub" id="ppWishlistSub">Loading...</div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+      <button class="pp-item" onclick="ppAction('Frequent Spots')">
+        <div class="pp-item-ico g"><i class="fa-solid fa-star"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">Frequent Spots</div>
+          <div class="pp-item-sub">Places you park at often</div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+
+      <div class="pp-divider"></div>
+
+      <!-- Settings -->
+      <div class="pp-section-label">// SETTINGS</div>
+      <button class="pp-item" onclick="ppAction('Notifications')">
+        <div class="pp-item-ico c"><i class="fa-solid fa-bell"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">Notifications</div>
+          <div class="pp-item-sub">Alerts, reminders, offers</div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+      <button class="pp-item" onclick="ppAction('Privacy')">
+        <div class="pp-item-ico c"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">Privacy & Security</div>
+          <div class="pp-item-sub">Password, 2FA, data</div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+      <button class="pp-item" onclick="closeProfilePanel();openHelp()">
+        <div class="pp-item-ico y"><i class="fa-solid fa-circle-question"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">Help & Support</div>
+          <div class="pp-item-sub">FAQs, contact, report issue</div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+
+      <div class="pp-divider"></div>
+
+      <!-- Logout -->
+      <button class="pp-item danger" onclick="logout()">
+        <div class="pp-item-ico r"><i class="fa-solid fa-right-from-bracket"></i></div>
+        <div class="pp-item-body">
+          <div class="pp-item-title">Logout</div>
+          <div class="pp-item-sub">Sign out of your account</div>
+        </div>
+        <i class="fa-solid fa-chevron-right pp-item-arrow"></i>
+      </button>
+
+    </div>

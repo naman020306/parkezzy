@@ -1,0 +1,306 @@
+<!-- Footer -->
+    <div class="pp-foot">
+      <div class="pp-foot-txt">PARKEZY v2.4 · MEMBER SINCE 2025</div>
+    </div>
+
+  </div><!-- end ppLoggedView -->
+
+</div><!-- end profile-panel -->
+
+<!-- AUTH MODAL -->
+<div class="mbg" id="authModal">
+  <div class="mbox">
+    <button class="mcx" onclick="closeModal()"><i class="fa-solid fa-xmark"></i></button>
+    <div class="msys">PARK_SYS v2.4 &nbsp;|&nbsp; STATUS: <span class="on">ONLINE</span> &nbsp;|&nbsp; SLOTS: 247</div>
+    <div class="mtabs">
+      <button class="mtab active" id="tabL" onclick="switchModal('login')">LOGIN</button>
+      <button class="mtab" id="tabR" onclick="switchModal('register')">REGISTER</button>
+    </div>
+    <div id="lf">
+      <label class="flbl">EMAIL / PHONE</label>
+      <input class="fin" type="text" id="loginEmail" placeholder="bhai@parkezy.in"/>
+      <label class="flbl">PASSWORD</label>
+      <input class="fin" type="password" placeholder="••••••••"/>
+      <div class="crow">
+        <label class="clbl"><input type="checkbox" style="margin-right:5px"/>Remember me</label>
+        <a class="fgt" href="#">Forgot?</a>
+      </div>
+      <button class="ctabtn" onclick="handleAuth('login')"><i class="fa-solid fa-play" style="font-size:0.6rem"></i>START PARKING</button>
+      <div class="odiv">OR CONTINUE WITH</div>
+      <div class="socr"><button class="socbtn">G &nbsp;Google</button><button class="socbtn">&#8226; &nbsp;Apple</button></div>
+      <div class="malt">Naya hai? <a onclick="switchModal('register')">Register kar bhai</a></div>
+    </div>
+    <div id="rf" style="display:none">
+      <label class="flbl">FULL NAME</label>
+      <input class="fin" type="text" id="regName" placeholder="Aapka Naam"/>
+      <label class="flbl">EMAIL / PHONE</label>
+      <input class="fin" type="text" placeholder="bhai@parkezy.in"/>
+      <label class="flbl">PASSWORD</label>
+      <input class="fin" type="password" placeholder="Create a strong password"/>
+      <button class="ctabtn" onclick="handleAuth('register')"><i class="fa-solid fa-user-plus" style="font-size:0.6rem"></i>CREATE ACCOUNT</button>
+      <div class="odiv">OR CONTINUE WITH</div>
+      <div class="socr"><button class="socbtn">G &nbsp;Google</button><button class="socbtn">&#8226; &nbsp;Apple</button></div>
+      <div class="malt">Already registered? <a onclick="switchModal('login')">Login here</a></div>
+    </div>
+  </div>
+</div>
+
+<!-- HELP -->
+<div class="hov" id="hov" onclick="closeHelp()"></div>
+<div class="hpan" id="hpan">
+  <div style="display:flex;align-items:center;justify-content:space-between">
+    <div class="htitle">HELP CENTER</div>
+    <button class="mcx" style="position:static" onclick="closeHelp()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="hsub">PARKEZY SYSTEM GUIDE v2.4</div>
+  <div class="hstitle">// AVAILABILITY CODES</div>
+  <div class="hitem"><div class="hico"><i class="fa-solid fa-circle" style="color:var(--green)"></i></div><div class="htxt"><strong>GREEN</strong> — Slot is free. Park immediately.</div></div>
+  <div class="hitem"><div class="hico"><i class="fa-solid fa-circle" style="color:var(--amber)"></i></div><div class="htxt"><strong>AMBER</strong> — Filling fast. Under 30% remaining.</div></div>
+  <div class="hitem"><div class="hico"><i class="fa-solid fa-circle" style="color:var(--red)"></i></div><div class="htxt"><strong>RED</strong> — Completely full. No slots available.</div></div>
+  <div class="hstitle">// LOCATION</div>
+  <div class="hitem"><div class="hico"><i class="fa-solid fa-crosshairs" style="color:var(--green)"></i></div><div class="htxt">Use <strong>GPS</strong> for auto-detection or type your area manually using the location button in the navbar.</div></div>
+  <div class="hstitle">// EV CHARGING</div>
+  <div class="hitem"><div class="hico"><i class="fa-solid fa-bolt" style="color:var(--yellow)"></i></div><div class="htxt">Toggle <strong>EV CHARGING ONLY</strong> in the filter bar to show only charging-enabled spots.</div></div>
+  <div class="hstitle">// DYNAMIC PRICING</div>
+  <div class="hitem"><div class="hico"><i class="fa-solid fa-tag" style="color:var(--cyan)"></i></div><div class="htxt"><strong>Cyan</strong> = normal, <strong>Amber</strong> = moderate demand, <strong>Red</strong> = surge pricing.</div></div>
+  <div class="hstitle">// WISHLIST</div>
+  <div class="hitem"><div class="hico"><i class="fa-solid fa-heart" style="color:var(--red)"></i></div><div class="htxt">Tap the heart on any card to save spots for quick access.</div></div>
+  <div style="margin-top:1.4rem;padding:13px;background:var(--bg-card2);border-radius:var(--rsm);border:1px solid var(--border)">
+    <div class="hsub" style="margin-bottom:7px">NEED MORE HELP?</div>
+    <button class="ctabtn" style="padding:9px" onclick="showToast('SUPPORT REQUEST SENT','s')">CONTACT SUPPORT</button>
+  </div>
+</div>
+
+<div class="tw" id="tw"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+const PLACES=[
+  {id:1,name:"Nexus Smart Park",location:"Koramangala, Bangalore",type:["covered","24h"],ev:true,total:48,free:34,price:"₹25/hr",priceLevel:"normal",rating:4.8,reviews:312,distance:"0.4 km",img:"https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=600&q=80"},
+  {id:2,name:"Metro Park Hub",location:"Indiranagar, Bangalore",type:["open","24h","disabled"],ev:false,total:60,free:5,price:"₹18/hr",priceLevel:"surge",rating:3.9,reviews:145,distance:"0.8 km",img:"https://images.unsplash.com/photo-1573348722427-f1d6819fdf98?w=600&q=80"},
+  {id:3,name:"GreenLot EV Centre",location:"Whitefield, Bangalore",type:["covered","disabled"],ev:true,total:36,free:18,price:"₹30/hr",priceLevel:"moderate",rating:4.6,reviews:489,distance:"1.1 km",img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80"},
+  {id:4,name:"Skyline Parking Tower",location:"MG Road, Bangalore",type:["covered","24h"],ev:false,total:80,free:0,price:"₹40/hr",priceLevel:"surge",rating:4.2,reviews:201,distance:"1.4 km",img:"https://images.unsplash.com/photo-1468436139062-f60a71c5c892?w=600&q=80"},
+  {id:5,name:"EcoCharge Parking",location:"HSR Layout, Bangalore",type:["open","disabled"],ev:true,total:28,free:22,price:"₹22/hr",priceLevel:"normal",rating:4.9,reviews:678,distance:"1.7 km",img:"https://images.unsplash.com/photo-1618090584176-7132b9911657?w=600&q=80"},
+  {id:6,name:"City Square Lot",location:"Jayanagar, Bangalore",type:["open","24h"],ev:false,total:45,free:12,price:"₹15/hr",priceLevel:"moderate",rating:3.7,reviews:92,distance:"2.0 km",img:"https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=600&q=80"},
+  {id:7,name:"Volt Park Station",location:"Electronic City",type:["covered","24h","disabled"],ev:true,total:52,free:41,price:"₹28/hr",priceLevel:"normal",rating:4.7,reviews:530,distance:"2.3 km",img:"https://images.unsplash.com/photo-1611887351827-2f7e895f74c4?w=600&q=80"},
+  {id:8,name:"Urban Nest Parking",location:"BTM Layout, Bangalore",type:["open"],ev:false,total:32,free:7,price:"₹12/hr",priceLevel:"moderate",rating:4.0,reviews:173,distance:"2.6 km",img:"https://images.unsplash.com/photo-1577563908411-5077b6dc7624?w=600&q=80"},
+];
+
+let evMode=false,activeFilter='all',searchQ='',sortMode=0,wishlist=new Set();
+let isLoggedIn=false,currentUser=null;
+let locDropOpen=false,manualPanelOpen=false;
+const sortModes=['DISTANCE','PRICE','RATING','AVAILABILITY'];
+
+/* ── LOCATION ── */
+function toggleLocDropdown(){
+  locDropOpen=!locDropOpen;
+  document.getElementById('locBtn').classList.toggle('active',locDropOpen);
+  document.getElementById('locDropdown').classList.toggle('open',locDropOpen);
+}
+function closeLocDropdown(){
+  locDropOpen=false;
+  document.getElementById('locBtn').classList.remove('active');
+  document.getElementById('locDropdown').classList.remove('open');
+  manualPanelOpen=false;
+  document.getElementById('manualPanel').classList.remove('show');
+  document.getElementById('manualArrow').style.transform='';
+}
+function toggleManualInput(){
+  manualPanelOpen=!manualPanelOpen;
+  document.getElementById('manualPanel').classList.toggle('show',manualPanelOpen);
+  document.getElementById('manualArrow').style.transform=manualPanelOpen?'rotate(90deg)':'';
+  if(manualPanelOpen)setTimeout(()=>document.getElementById('manualLocInput').focus(),320);
+}
+function setManualLocation(){
+  const val=document.getElementById('manualLocInput').value.trim();
+  if(!val){showToast('ENTER A LOCATION FIRST','w');return;}
+  document.getElementById('locValue').textContent=val;
+  document.getElementById('manualLocInput').value='';
+  closeLocDropdown();
+  showToast('📍 LOCATION SET: '+val.toUpperCase(),'s');
+}
+function useGPS(){
+  if(!navigator.geolocation){showToast('GPS NOT SUPPORTED','e');return;}
+  document.getElementById('gpsOption').style.display='none';
+  document.getElementById('gpsLoading').classList.add('show');
+  navigator.geolocation.getCurrentPosition(
+    pos=>{
+      document.getElementById('gpsLoading').classList.remove('show');
+      document.getElementById('gpsOption').style.display='flex';
+      const lat=pos.coords.latitude.toFixed(4),lng=pos.coords.longitude.toFixed(4);
+      document.getElementById('locValue').textContent='Current Location';
+      closeLocDropdown();
+      showToast('📡 GPS ACQUIRED · '+lat+'°N, '+lng+'°E','s');
+    },
+    err=>{
+      document.getElementById('gpsLoading').classList.remove('show');
+      document.getElementById('gpsOption').style.display='flex';
+      showToast('GPS DENIED — USE MANUAL','e');
+      toggleManualInput();
+    },
+    {timeout:8000}
+  );
+}
+
+/* ── PROFILE PANEL ── */
+function openProfilePanel(){
+  document.getElementById('profilePanel').classList.add('open');
+  document.getElementById('profileOverlay').classList.add('show');
+  document.getElementById('profileBtn').classList.add('active');
+  // hide notif badge when opened
+  document.getElementById('profileNotif').style.display='none';
+  if(isLoggedIn){
+    document.getElementById('ppWishlistSub').textContent = wishlist.size + ' spot' + (wishlist.size!==1?'s':'') + ' saved';
+    document.getElementById('ppSaved').textContent = wishlist.size;
+  }
+}
+function closeProfilePanel(){
+  document.getElementById('profilePanel').classList.remove('open');
+  document.getElementById('profileOverlay').classList.remove('show');
+  document.getElementById('profileBtn').classList.remove('active');
+}
+function ppAction(label){
+  closeProfilePanel();
+  showToast('→ ' + label.toUpperCase(), 's');
+}
+
+function setLoggedIn(name, email){
+  isLoggedIn=true; currentUser=name;
+  const initials=name.trim().split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)||'U';
+  // update panel
+  document.getElementById('ppInitials').textContent=initials;
+  document.getElementById('ppName').textContent=name.toUpperCase();
+  document.getElementById('ppEmail').textContent=email||(name.toLowerCase().replace(/\s/g,'')+'@parkezy.in');
+  // swap views
+  document.getElementById('ppGuestView').style.display='none';
+  document.getElementById('ppLoggedView').style.display='flex';
+  document.getElementById('ppPanelTitle').textContent='MY ACCOUNT';
+  // show online dot, hide login/register buttons
+  document.getElementById('profileDot').style.display='';
+  document.getElementById('loginBtn').style.display='none';
+  document.getElementById('registerBtn').style.display='none';
+  // show notif badge briefly
+  document.getElementById('profileNotif').style.display='flex';
+}
+
+function logout(){
+  isLoggedIn=false; currentUser=null;
+  // swap back
+  document.getElementById('ppGuestView').style.display='';
+  document.getElementById('ppLoggedView').style.display='none';
+  document.getElementById('ppPanelTitle').textContent='MY PROFILE';
+  document.getElementById('profileDot').style.display='none';
+  document.getElementById('loginBtn').style.display='';
+  document.getElementById('registerBtn').style.display='';
+  document.getElementById('profileNotif').style.display='none';
+  closeProfilePanel();
+  showToast('LOGGED OUT SUCCESSFULLY','s');
+}
+
+/* close loc dropdown on outside click */
+document.addEventListener('click',function(e){
+  if(!document.getElementById('locWrap').contains(e.target)) closeLocDropdown();
+});
+
+/* ── CARDS ── */
+function gc(free,total){const p=free/total;return p===0?'r':p<0.3?'a':'g';}
+function gs(free,total){const p=free/total;return p===0?'FULL':p<0.3?'FILLING':'OPEN';}
+function renderCard(p){
+  const c=gc(p.free,p.total),pct=Math.round((p.free/p.total)*100),saved=wishlist.has(p.id);
+  const pc=p.priceLevel==='normal'?'':p.priceLevel;
+  return `<div class="pcard ${p.ev?'evc':''}" data-id="${p.id}">
+  <div class="ciw">
+    <img class="ci" src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1506521781263-d8422e82f27a?w=600&q=80'"/>
+    <div class="bp ${pc}"><div class="pdot"></div>${p.price}</div>
+    <button class="bw ${saved?'saved':''}" onclick="toggleWish(event,${p.id})"><i class="fa-${saved?'solid':'regular'} fa-heart"></i></button>
+    ${p.ev?`<div class="evb"><i class="fa-solid fa-bolt"></i>EV CHARGER</div>`:''}
+    <div class="stp ${c}">${gs(p.free,p.total)}</div>
+  </div>
+  <div class="cb">
+    <div class="cn">${p.name}</div>
+    <div class="cl"><i class="fa-solid fa-location-dot"></i>${p.location} · ${p.distance}</div>
+    <div class="ah">
+      <span class="al">SPACE AVAILABILITY</span>
+      <span class="an ${c}">${p.free}/${p.total} FREE · ${pct}%</span>
+    </div>
+    <div class="at"><div class="af ${c}" style="width:${pct}%"></div></div>
+    <div class="cf">
+      <div class="csr">
+        <div class="cs"><i class="fa-solid fa-car" style="color:var(--cyan)"></i>${p.total} SLOTS</div>
+        ${p.type.includes('covered')?`<div class="cs"><i class="fa-solid fa-warehouse" style="color:var(--cyan)"></i>COVERED</div>`:''}
+        ${p.type.includes('24h')?`<div class="cs"><i class="fa-solid fa-clock" style="color:var(--amber)"></i>24H</div>`:''}
+      </div>
+      <div class="cr"><i class="fa-solid fa-star" style="font-size:0.58rem"></i>${p.rating}<span class="crc">(${p.reviews})</span></div>
+    </div>
+  </div>
+</div>`;
+}
+function getFiltered(){return PLACES.filter(p=>{
+  if(evMode&&!p.ev)return false;
+  if(activeFilter==='available'&&p.free===0)return false;
+  if(!['all','available'].includes(activeFilter)&&!p.type.includes(activeFilter))return false;
+  if(searchQ&&!p.name.toLowerCase().includes(searchQ)&&!p.location.toLowerCase().includes(searchQ))return false;
+  return true;
+});}
+function getSorted(a){const c=[...a];if(sortMode===1)c.sort((a,b)=>parseInt(a.price)-parseInt(b.price));else if(sortMode===2)c.sort((a,b)=>b.rating-a.rating);else if(sortMode===3)c.sort((a,b)=>(b.free/b.total)-(a.free/a.total));return c;}
+function renderGrid(){
+  const f=getSorted(getFiltered()),n=f.length;
+  const cnt=document.getElementById('secCnt');
+  cnt.textContent=`${n} SPOT${n!==1?'S':''}`;cnt.className=`sec-cnt${evMode?' ev':''}`;
+  document.getElementById('secTitle').textContent=evMode?'EV CHARGING SPOTS':'NEARBY PARKING';
+  document.getElementById('parkGrid').innerHTML=n?f.map(renderCard).join(''):`<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--text-dim);font-family:var(--mono);font-size:0.72rem;letter-spacing:1px"><i class="fa-solid fa-circle-exclamation" style="font-size:2rem;display:block;margin-bottom:1rem;color:var(--text-dim)"></i>NO SPOTS MATCH CURRENT FILTERS</div>`;
+}
+function toggleEV(){evMode=!evMode;document.getElementById('evToggle').classList.toggle('on',evMode);document.getElementById('evBanner').classList.toggle('show',evMode);renderGrid();showToast(evMode?'⚡ EV MODE ACTIVE':'ALL SPOTS SHOWN',evMode?'w':'s');}
+function setFilter(el,f){activeFilter=f;document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));el.classList.add('active');renderGrid();}
+function handleSearch(){searchQ=document.getElementById('searchInput').value.toLowerCase();renderGrid();}
+function cycleSort(){sortMode=(sortMode+1)%sortModes.length;document.getElementById('sortLbl').textContent=`SORT: ${sortModes[sortMode]}`;renderGrid();}
+function toggleWish(e,id){
+  e.stopPropagation();
+  wishlist.has(id)?(wishlist.delete(id),showToast('REMOVED FROM WISHLIST','s')):(wishlist.add(id),showToast('❤ SAVED TO WISHLIST','s'));
+  renderGrid();
+}
+
+/* ── AUTH ── */
+function openModal(t){document.getElementById('authModal').classList.add('show');switchModal(t);}
+function closeModal(){document.getElementById('authModal').classList.remove('show');}
+function switchModal(t){
+  document.getElementById('lf').style.display=t==='login'?'block':'none';
+  document.getElementById('rf').style.display=t==='register'?'block':'none';
+  document.getElementById('tabL').classList.toggle('active',t==='login');
+  document.getElementById('tabR').classList.toggle('active',t==='register');
+}
+function handleAuth(t){
+  closeModal();
+  if(t==='login'){
+    const email=document.getElementById('loginEmail').value.trim()||'bhai@parkezy.in';
+    const name=email.split('@')[0].replace(/[._-]/g,' ');
+    setLoggedIn(name||'User', email);
+    showToast('✓ LOGGED IN SUCCESSFULLY','s');
+  } else {
+    const name=document.getElementById('regName').value.trim()||'ParkEzy User';
+    const email=name.toLowerCase().replace(/\s/g,'')+'@parkezy.in';
+    setLoggedIn(name, email);
+    showToast('✓ ACCOUNT CREATED','s');
+  }
+}
+document.getElementById('authModal').addEventListener('click',function(e){if(e.target===this)closeModal();});
+
+/* ── HELP ── */
+function openHelp(){document.getElementById('hpan').classList.add('open');document.getElementById('hov').classList.add('show');}
+function closeHelp(){document.getElementById('hpan').classList.remove('open');document.getElementById('hov').classList.remove('show');}
+
+/* ── TOAST ── */
+function showToast(msg,type='s'){
+  const w=document.getElementById('tw'),t=document.createElement('div');
+  const icon=type==='s'?'circle-check':type==='w'?'bolt':'circle-xmark';
+  t.className=`ti ${type}`;t.innerHTML=`<i class="fa-solid fa-${icon}"></i>${msg}`;
+  w.appendChild(t);setTimeout(()=>{t.style.transition='opacity 0.3s';t.style.opacity='0';setTimeout(()=>t.remove(),300);},2800);
+}
+
+/* ── LIVE SIM ── */
+function simLive(){PLACES.forEach(p=>{const d=Math.floor(Math.random()*5)-2;p.free=Math.max(0,Math.min(p.total,p.free+d));});renderGrid();}
+renderGrid();
+setInterval(simLive,15000);
+</script>
+</body>
+</html>
